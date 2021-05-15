@@ -12,6 +12,11 @@
     color: gold;
 }
 
+.dialogsItems img {
+    width: 40px;
+    margin: 5px;
+}
+
 .messages {
     padding: 10px;
 
