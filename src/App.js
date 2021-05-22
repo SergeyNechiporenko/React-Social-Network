@@ -10,7 +10,7 @@ import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
-import { updateNewPostText } from "./redux/state";
+import store, { updateNewPostText } from "./redux/state";
 
 const App = (props) => {
   return (
@@ -20,22 +20,37 @@ const App = (props) => {
         <Navbar />
         <div className="app-wrapper-content">
           {/* <Route path='/profile' component={Profile} /> */}
-          <Route path='/profile' render={ () => <Profile 
-            profilePage={props.state.profilePage} 
-            dispatch={props.dispatch} /> } />
-          <Route path='/dialogs' render={ () => <Dialogs 
-            dialogsPage={props.state.dialogsPage}
-            addMessage={props.addMessage} 
-            updateNewMessageText={props.updateNewMessageText}
-            /> } />
-          <Route path='/news' render={ () => <News /> } />
-          <Route path='/music' render={ () => <Music /> } />
-          <Route path='/settings' render={ () => <Settings /> } />
-          <Route path='/friends' render={ () => <Friends state={props.state.friendsPage} /> } />
+          <Route
+            path="/profile"
+            render={() => (
+              <Profile
+                profilePage={props.state.profilePage}
+                dispatch={props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path="/dialogs"
+            render={() => (
+              <Dialogs
+                store={props.store}
+                newMessageText={props.state.dialogsPage.newMessageText}
+                dialogsPage={props.state.dialogsPage}
+                dispatch={props.dispatch}
+              />
+            )}
+          />
+          <Route path="/news" render={() => <News />} />
+          <Route path="/music" render={() => <Music />} />
+          <Route path="/settings" render={() => <Settings />} />
+          <Route
+            path="/friends"
+            render={() => <Friends state={props.state.friendsPage} />}
+          />
         </div>
       </div>
     </BrowserRouter>
-    );
+  );
 };
 
 export default App;
